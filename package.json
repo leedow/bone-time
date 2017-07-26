@@ -1,0 +1,26 @@
+{
+  "name": "bone-time",
+  "version": "1.0.0",
+  "description": "A tool for formating time",
+  "main": "bonetime.js",
+  "scripts": {
+    "build": "uglifyjs bonetime.js -o bonetime.min.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leedow/bone-time.git"
+  },
+  "author": "leedow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leedow/bone-time/issues"
+  },
+  "homepage": "https://github.com/leedow/bone-time#readme",
+  "devDependencies": {
+    "jasmine-core": "^2.6.4",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.0"
+  }
+}
