@@ -22,7 +22,7 @@
    */
   Time.prototype.init = function(str) {
 
-    if(str){
+    if(typeof str == 'string'){
       var d = str.split(' ')
       var d1 = d[0].split('-')
 
@@ -43,7 +43,11 @@
 
       this.obj = new Date(this.year, this.month - 1, this.date, this.hour, this.minute, this.second)
     } else {
-      this.obj = new Date()
+      if(str instanceof Date){
+        this.obj = str
+      } else {
+        this.obj = new Date()
+      }
       this.year = this.obj.getFullYear()
       this.month = this.obj.getMonth()+1
       this.date = this.obj.getDate()
