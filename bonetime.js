@@ -103,8 +103,8 @@
 
   /**
    * 转换时间
-   * @param {param} ‘beginOfWeek’ 周一
-   *                'lastOfWeek' 周日
+   * @param {param} Mon 周一
+   *                Sun 周日
    * @return Time Object
    */
   Time.prototype.transfer = function(param){
@@ -115,12 +115,12 @@
         year = base.getFullYear()
 
     switch(param){
-      case 'beginOfWeek': {
+      case 'Mon': {
         base.setDate(date - day + 1)
         return new Time(base)
         break;
       }
-      case 'lastOfWeek': {
+      case 'Sun': {
         base.setDate(date + (7-day))
         return new Time(base)
         break;
