@@ -55,6 +55,18 @@
           document.write(new bonetime(new Date()).format('yyyy年MM月dd日 HH时mm分ss秒'))
         </script>
       </p>
+      <p>本周一:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('beginOfWeek').format('yyyy年MM月dd日'))
+        </script>
+      </p>
+      <p>本周日:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('lastOfWeek').format('yyyy年MM月dd日'))
+        </script>
+      </p>
     </div>
 
   </body>

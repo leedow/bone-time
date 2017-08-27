@@ -101,6 +101,33 @@
     return result
   }
 
+  /**
+   * 转换时间
+   * @param {param} ‘beginOfWeek’ 周一
+   *                'lastOfWeek' 周日
+   * @return Time Object
+   */
+  Time.prototype.transfer = function(param){
+    var base = this.obj
+    var day = base.getDay()==0?7:base.getDate(),
+        date = base.getDate(),
+        month = base.getMonth(),
+        year = base.getFullYear()
+
+    switch(param){
+      case 'beginOfWeek': {
+        base.setDate(date - day + 1)
+        return new Time(base)
+        break;
+      }
+      case 'lastOfWeek': {
+        base.setDate(date + (7-day))
+        return new Time(base)
+        break;
+      }
+    }
+  }
+
 
   if (typeof module != 'undefined') {
     module.exports = Time
