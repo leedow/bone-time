@@ -109,14 +109,24 @@
    */
   Time.prototype.transfer = function(param){
     var base = this.obj
-    var day = base.getDay()==0?7:base.getDate(),
+    var day = base.getDay()==0?7:base.getDay(),
         date = base.getDate(),
         month = base.getMonth(),
-        year = base.getFullYear()
+        year = base.getFullYear(),
+        driver = param,
+        params = {
+          'Mon': 1,
+          'Tues': 2,
+          'Wed': 3,
+          'Thur': 4,
+          'Fri': 5,
+          'Sat': 6,
+          'Sun': 7
+        }
 
     switch(param){
-      case 'Mon': {
-        base.setDate(date - day + 1)
+      case 'Mon': case 'Tues': case 'Wed': case 'Thur': case 'Fri': case 'Sat': {
+        base.setDate(date - day + params[driver])
         return new Time(base)
         break;
       }
