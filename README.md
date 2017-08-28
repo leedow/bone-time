@@ -28,5 +28,7 @@ document.write(today.transfer('Thur').format('yyyy年MM月dd日'))
 document.write(today.transfer('Fri').format('yyyy年MM月dd日'))
 document.write(today.transfer('Sat').format('yyyy年MM月dd日'))
 document.write(today.transfer('Sum').format('yyyy年MM月dd日'))
+//10 days later
+document.write(today.transfer('+10days').format('yyyy年MM月dd日'))
 
 ```

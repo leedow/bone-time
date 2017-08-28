@@ -74,6 +74,19 @@
           document.write(today.transfer('Sun').format('yyyy年MM月dd日'))
         </script>
       </p>
+
+      <p>10days later:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('+10days').format('yyyy年MM月dd日'))
+        </script>
+      </p>
+      <p>10days before:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('-10days').format('yyyy年MM月dd日'))
+        </script>
+      </p>
     </div>
 
   </body>

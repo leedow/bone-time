@@ -113,7 +113,7 @@
         date = base.getDate(),
         month = base.getMonth(),
         year = base.getFullYear(),
-        driver = param,
+        driver = filter(param),
         params = {
           'Mon': 1,
           'Tues': 2,
@@ -124,9 +124,9 @@
           'Sun': 7
         }
 
-    switch(param){
+    switch(driver.mode){
       case 'Mon': case 'Tues': case 'Wed': case 'Thur': case 'Fri': case 'Sat': {
-        base.setDate(date - day + params[driver])
+        base.setDate(date - day + params[driver.mode])
         return new Time(base)
         break;
       }
@@ -134,6 +134,34 @@
         base.setDate(date + (7-day))
         return new Time(base)
         break;
+      }
+      case 'days': {
+        base.setDate(date + driver.value)
+        return new Time(base)
+        break;
+      }
+      default:{
+        return this
+      }
+    }
+
+    function filter(str){
+      var plus = true,
+          correct = false,
+          mode = str
+      if(/^\+\d+days$/g.test(str)){
+        mode = 'days'
+         correct = true
+         plus = true
+      }
+      if(/^\-\d+days$/g.test(str)){
+        mode = 'days'
+        correct = true
+        plus = false
+      }
+      return {
+        value: parseInt(str),
+        mode: mode
       }
     }
   }
