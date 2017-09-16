@@ -87,6 +87,104 @@
           document.write(today.transfer('-10days').format('yyyy年MM月dd日'))
         </script>
       </p>
+
+      <p>1999year:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('1999year').format('yyyy年MM月dd日'))
+        </script>
+      </p>
+
+      <p>1 year before:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('-1year').format('yyyy年MM月dd日'))
+        </script>
+      </p>
+
+      <p>1 year later:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('+1year').format('yyyy年MM月dd日'))
+        </script>
+      </p>
+
+      <p>January:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('0month').format('yyyy年MM月dd日'))
+        </script>
+      </p>
+      <p>10 month before:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('-10month').format('yyyy年MM月dd日 HH:mm'))
+        </script>
+      </p>
+      <p>10 month later:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('+10month').format('yyyy年MM月dd日 HH:mm'))
+        </script>
+      </p>
+
+      <p>10:00 AM today:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('10hours').transfer('0minutes').format('yyyy年MM月dd日 HH:mm'))
+        </script>
+      </p>
+      <p>10 hours before:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('-10hours').format('yyyy年MM月dd日 HH:mm'))
+        </script>
+      </p>
+      <p>10 hours later:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('+10hours').format('yyyy年MM月dd日 HH:mm'))
+        </script>
+      </p>
+
+      <p> 0 minutes:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('0minutes').format('yyyy年MM月dd日 HH:mm'))
+        </script>
+      </p>
+      <p>30 minutes before:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('-30minutes').format('yyyy年MM月dd日 HH:mm'))
+        </script>
+      </p>
+      <p>30 minutes later:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('+30minutes').format('yyyy年MM月dd日 HH:mm'))
+        </script>
+      </p>
+
+      <p> 0 seconds:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('0seconds').format('yyyy年MM月dd日 HH:mm:ss'))
+        </script>
+      </p>
+      <p>30 seconds before:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('-30seconds').format('yyyy年MM月dd日 HH:mm:ss'))
+        </script>
+      </p>
+      <p>30 seconds later:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('+30seconds').format('yyyy年MM月dd日 HH:mm:ss'))
+        </script>
+      </p>
+
     </div>
 
   </body>

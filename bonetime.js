@@ -4,7 +4,6 @@
    */
   function Time(str) {
     this.obj = null //原生JS DATE对象
-    this.time = 0 //时间戳
     this.year = 0
     this.month = 0
     this.date = 0
@@ -55,8 +54,6 @@
       this.minute = this.obj.getMinutes()
       this.second = this.obj.getSeconds()
     }
-
-
   }
 
   /**
@@ -90,31 +87,43 @@
    * @param {format} yy-mm-dd hh:mm:ss
    */
   Time.prototype.format = function(format) {
+    function filter(num) {
+     return (Array(2).join('0') + num).slice(-2);
+    }
 
     var result = format.replace('yyyy', this.year)
-    result = result.replace('MM', this.month)
-    result = result.replace('dd', this.date)
-    result = result.replace('HH', this.hour)
-    result = result.replace('mm', this.minute)
-    result = result.replace('ss', this.second)
+    result = result.replace('MM', filter(this.month))
+    result = result.replace('dd', filter(this.date))
+    result = result.replace('HH', filter(this.hour))
+    result = result.replace('mm', filter(this.minute))
+    result = result.replace('ss', filter(this.second))
 
     return result
   }
 
+  Time.prototype.getTime = function() {
+    return this.obj.getTime()
+  }
+
   /**
    * 转换时间
-   * @param {param} Mon 周一
-   *                Sun 周日
+   * @param {param} Mon|Tues|..|Sun|+10days|-10days|2017year|9month|11date|11hour|11min|11seconds
    * @return Time Object
    */
   Time.prototype.transfer = function(param){
-    var base = this.obj
-    var day = base.getDay()==0?7:base.getDay(),
-        date = base.getDate(),
-        month = base.getMonth(),
-        year = base.getFullYear(),
+    var base = new Date(this.obj.getTime())
+    var d = {
+          day : base.getDay()==0?7:base.getDay(),
+          date : base.getDate(),
+          month : base.getMonth(),
+          year : base.getFullYear(),
+          date: base.getDate(),
+          hours: base.getHours(),
+          minutes: base.getMinutes(),
+          seconds: base.getSeconds()
+        },
         driver = filter(param),
-        params = {
+        week = {
           'Mon': 1,
           'Tues': 2,
           'Wed': 3,
@@ -122,21 +131,41 @@
           'Fri': 5,
           'Sat': 6,
           'Sun': 7
+        },
+        funcs = {
+          'year': 'setFullYear',
+          'month': 'setMonth',
+          'date': 'setDate',
+          'hours': 'setHours',
+          'minutes': 'setMinutes',
+          'seconds': 'setSeconds'
         }
 
     switch(driver.mode){
       case 'Mon': case 'Tues': case 'Wed': case 'Thur': case 'Fri': case 'Sat': {
-        base.setDate(date - day + params[driver.mode])
+        base.setDate(d.date - d.day + week[driver.mode])
         return new Time(base)
         break;
       }
       case 'Sun': {
-        base.setDate(date + (7-day))
+        base.setDate(d.date + (7-d.day))
         return new Time(base)
         break;
       }
       case 'days': {
-        base.setDate(date + driver.value)
+        base.setDate(d.date + driver.value)
+        return new Time(base)
+        break;
+      }
+      case 'year': case 'month': case 'date': case 'hours': case 'minutes': case 'seconds': {
+
+        if(driver.prefix === '+' || driver.prefix === '-'){
+
+          base[funcs[driver.mode]](d[driver.mode] + driver.value)
+        }  else {
+          base[funcs[driver.mode]](driver.value)
+        }
+
         return new Time(base)
         break;
       }
@@ -146,22 +175,13 @@
     }
 
     function filter(str){
-      var plus = true,
-          correct = false,
-          mode = str
-      if(/^\+\d+days$/g.test(str)){
-        mode = 'days'
-         correct = true
-         plus = true
-      }
-      if(/^\-\d+days$/g.test(str)){
-        mode = 'days'
-        correct = true
-        plus = false
-      }
+      var prefix = str.match(/^\+|\-/),
+          mode = str.match(/[a-zA-Z]+/)
+
       return {
-        value: parseInt(str),
-        mode: mode
+        prefix: prefix?prefix[0]:'',
+        mode: mode?mode[0]:'',
+        value: parseInt(str)
       }
     }
   }
