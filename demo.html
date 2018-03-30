@@ -128,6 +128,18 @@
         </script>
       </p>
 
+      <p>first day of month:
+        <script type="text/javascript">
+          var today = new bonetime()
+          document.write(today.transfer('1date').transfer('0hours').transfer('0minutes').transfer('0seconds').format('yyyy年MM月dd日 HH:mm'))
+          var today2 = new bonetime()
+          document.write(today2.transfer('1date').transfer('0hours').transfer('0minutes').transfer('0seconds').format('yyyy年MM月dd日 HH:mm'))
+
+        </script>
+      </p>
+
+
+
       <p>10:00 AM today:
         <script type="text/javascript">
           var today = new bonetime()
@@ -182,6 +194,13 @@
         <script type="text/javascript">
           var today = new bonetime()
           document.write(today.transfer('+30seconds').format('yyyy年MM月dd日 HH:mm:ss'))
+        </script>
+      </p>
+
+      <p> now - (10:10:10 before):
+        <script type="text/javascript">
+          var now = new bonetime()
+          document.write(now.sub(now.transfer('-10hours').transfer('-20minutes').transfer('-30seconds')).str)
         </script>
       </p>
 

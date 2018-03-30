@@ -84,6 +84,28 @@
   }
 
   /**
+   * 计算两个日期距离
+   * @param {Time} aim
+   * @param {Boolean} format 格式化结果为hh:mm:ss
+   */
+  Time.prototype.sub = function(aim){
+    var dis = this.obj.getTime() - aim.obj.getTime()
+    dis = parseInt(dis/1000)
+
+    var ss = dis%60
+    var mm = (dis-ss)%3600/60
+    var hh = parseInt((dis-ss-mm*60)/3600)
+
+    return {
+      distance: dis,
+      h: hh,
+      m: mm,
+      s: ss,
+      str: hh + ':' + mm + ':' + ss
+    }
+  }
+
+  /**
    * @param {format} yy-mm-dd hh:mm:ss
    */
   Time.prototype.format = function(format) {
@@ -184,6 +206,8 @@
         value: parseInt(str)
       }
     }
+
+    return this
   }
 
 
